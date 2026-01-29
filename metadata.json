@@ -1,0 +1,7 @@
+{
+  "name": "La Llave de tu Potencial",
+  "description": "Una aplicación de desarrollo personal para líderes y profesionales enfocada en rituales diarios: C.A.F.É., ARA y Cierre.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
