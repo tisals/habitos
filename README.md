@@ -1,56 +1,73 @@
+
 # 🚀 Despliegue: La Llave de tu Potencial
 
-Guía rápida para desplegar el prototipo en un VPS con **Ubuntu 24.04** usando **Docker** y **EasyPanel**.
+Este documento detalla los pasos para instalar y desplegar el prototipo de **La Llave de tu Potencial** en un VPS con **Ubuntu 24.04** utilizando **Docker** y el panel de control **EasyPanel**.
+
+## 📋 Requisitos Previos
+
+- Un VPS con Ubuntu 24.04 (LTS).
+- Acceso SSH al servidor.
+- Un dominio o subdominio apuntando a la IP de tu VPS (opcional, pero recomendado).
 
 ---
+## 🎛️ Paso 1: Instalación de EasyPanel
 
-## 🛠️ Paso 1: Subir el código a GitHub
-
-1. **Crea un repositorio** en tu cuenta de GitHub (ej: `la-llave-app`).
-2. **Inicializa y sube los archivos** desde tu carpeta local:
-   ```bash
-   git init
-   git add .
-   git commit -m "Initial commit: Prototipo La Llave de tu Potencial"
-   git branch -M main
-   git remote add origin https://github.com/TU_USUARIO/TU_REPOSITORIO.git
-   git push -u origin main
-   ```
-
----
-
-## 🎛️ Paso 2: Instalar EasyPanel en tu VPS
-
-Conéctate a tu servidor Ubuntu 24.04 vía SSH y ejecuta el script oficial de instalación. Esto instalará Docker y el panel automáticamente.
+EasyPanel es un panel de control moderno que simplifica el despliegue de aplicaciones Docker.
 
 ```bash
-# Actualizar sistema e instalar EasyPanel
+# Ejecutar script de instalación oficial de EasyPanel
 curl -sSL https://get.easypanel.io | sh
 ```
 
-Una vez finalizado, accede a:
-`http://LA_IP_DE_TU_VPS:3000`
+Una vez finalizada la instalación, podrás acceder al panel desde tu navegador:
+`http://TU_IP_DEL_VPS:3000`
 
-*Crea tu usuario y contraseña de administrador al entrar por primera vez.*
+*Sigue las instrucciones en pantalla para crear tu cuenta de administrador.*
 
 ---
 
-## 🚢 Paso 3: Desplegar desde GitHub
+## 🚢 Paso 2: Despliegue de la Aplicación
 
-1. **Crear Proyecto**: En el dashboard de EasyPanel, haz clic en **"Create Project"** y nómbralo `la-llave`.
-2. **Crear Servicio**: Dentro del proyecto, selecciona **"App"** y nómbrala `frontend`.
-3. **Configurar GitHub**:
-   - En la pestaña **"Source"**, selecciona **"GitHub"**.
-   - Conecta tu cuenta de GitHub y selecciona el repositorio que creaste en el Paso 1.
-   - Asegúrate de que la rama sea `main`.
-4. **Desplegar**: Haz clic en el botón **"Deploy"**. 
-   - EasyPanel detectará el `Dockerfile` automáticamente y servirá la app.
-5. **Configurar Dominio (Opcional)**:
-   - Ve a la pestaña **"Domains"** para asignar un subdominio gratuito de EasyPanel o vincular tu propio dominio apuntando a la IP del VPS.
+1.  **Entra en EasyPanel**: Inicia sesión en tu panel.
+2.  **Crea un Proyecto**: Haz clic en "Create Project" y nómbralo `la-llave`.
+3.  **Crea un Servicio**: 
+    - Elige "App".
+    - Nombre del servicio: `frontend`.
+4.  **Configura el Origen (Source)**:
+    - Si tienes el código en GitHub: Conecta tu cuenta y selecciona el repositorio.
+    - Si usas Docker directamente: EasyPanel detectará automáticamente el archivo `Dockerfile` en la raíz del proyecto.
+5.  **Dominios**:
+    - EasyPanel te asignará una URL interna o puedes configurar tu propio dominio en la pestaña "Domains".
+6.  **Desplegar**: Haz clic en el botón "Deploy".
+
+---
+
+## ⚙️ Estructura del Proyecto para Producción
+
+Para que el despliegue funcione correctamente, asegúrate de que tu repositorio contenga:
+
+- `index.html`: Punto de entrada.
+- `index.tsx` y archivos de vista: Código fuente.
+- `Dockerfile`: Incluido en este repositorio para configurar Nginx.
+- `metadata.json`: Para permisos específicos del navegador.
+
+---
+
+## 🛡️ Seguridad Recomendada
+
+Se recomienda configurar un firewall básico en Ubuntu:
+
+```bash
+sudo ufw allow 22/tcp
+sudo ufw allow 80/tcp
+sudo ufw allow 443/tcp
+sudo ufw allow 3000/tcp
+sudo ufw enable
+```
 
 ---
 
 ## 📝 Notas del Prototipo
-- **Persistencia**: Los datos se guardan en el `localStorage` del navegador.
-- **Dockerfile**: El archivo incluido utiliza Nginx Alpine para un rendimiento ligero y rápido.
-- **Seguridad**: EasyPanel gestiona automáticamente los certificados SSL (HTTPS) si configuras un dominio.
+
+- **Datos**: Esta versión utiliza `localStorage` para persistencia local en el navegador (Datos Dummy). No requiere base de datos externa en esta fase.
+- **Microfono**: La aplicación solicita permisos de micrófono para futuras integraciones de IA (configurado en `metadata.json`).
