@@ -13,12 +13,12 @@ interface DashboardViewProps {
 
 const DashboardView: React.FC<DashboardViewProps> = ({ user, stats, rituals, onSelectRitual, onGoToPlans, onGoToAdmin }) => {
   const isCafeDone = stats.completionsToday.includes('ritual_cafe');
-  const isCierreDone = stats.completionsToday.includes('ritual_cierre');
-  const isDayWon = isCafeDone && isCierreDone;
+  const isLifeDone = stats.completionsToday.includes('ritual_life');
+  const isDayWon = isCafeDone && isLifeDone;
 
   const getSmartMessage = () => {
     if (!isCafeDone) return "Tu día está intacto. Empecemos por ganar tu mañana con C.A.F.É.";
-    if (isCafeDone && !isCierreDone) return "Ya ganaste la mañana, ahora no dejes el día abierto. Reserva 5 min para el cierre.";
+    if (isCafeDone && !isLifeDone) return "Ya ganaste la mañana, ahora no dejes el día abierto. Reserva 5 min para el cierre.";
     return "¡Día Ganado! Has cumplido tus rituales hoy. Tu potencial está activado.";
   };
 
@@ -73,7 +73,7 @@ const DashboardView: React.FC<DashboardViewProps> = ({ user, stats, rituals, onS
             >
               <div className="flex justify-between items-start mb-2">
                 <span className="text-3xl">
-                  {ritual.type === RitualType.CAFE ? '☕' : ritual.type === RitualType.ARA ? '⚡' : '🌙'}
+                  {ritual.type === RitualType.CAFE ? '☕' : ritual.type === RitualType.ARA ? '⚡' : '✨'}
                 </span>
                 {isDone ? (
                   <span className="bg-green-500 text-white p-1 rounded-full">

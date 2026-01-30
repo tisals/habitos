@@ -13,7 +13,7 @@ const AdminView: React.FC<AdminViewProps> = ({ rituals, completions, onBack }) =
     totalCompletions: completions.length,
     cafeCompletions: completions.filter(c => c.ritualId === 'ritual_cafe').length,
     araCompletions: completions.filter(c => c.ritualId === 'ritual_ara').length,
-    cierreCompletions: completions.filter(c => c.ritualId === 'ritual_cierre').length,
+    lifeCompletions: completions.filter(c => c.ritualId === 'ritual_life').length,
   };
 
   return (
@@ -42,8 +42,8 @@ const AdminView: React.FC<AdminViewProps> = ({ rituals, completions, onBack }) =
             <div className="text-2xl font-black text-red-600">{stats.araCompletions}</div>
           </div>
           <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
-            <span className="text-xs text-slate-400 font-medium">Cierre</span>
-            <div className="text-2xl font-black text-purple-600">{stats.cierreCompletions}</div>
+            <span className="text-xs text-slate-400 font-medium">Life</span>
+            <div className="text-2xl font-black text-purple-600">{stats.lifeCompletions}</div>
           </div>
         </div>
       </section>

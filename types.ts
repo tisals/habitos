@@ -8,7 +8,7 @@ export enum UserLevel {
 export enum RitualType {
   CAFE = 'CAFE',
   ARA = 'ARA',
-  CIERRE = 'CIERRE'
+  LIFE = 'LIFE' // Cambiado de CIERRE a LIFE
 }
 
 export interface RitualStep {
@@ -16,6 +16,8 @@ export interface RitualStep {
   title: string;
   description: string;
   durationSeconds: number;
+  audioPath?: string;
+  checkpoints?: string[];
 }
 
 export interface Ritual {

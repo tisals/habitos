@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Ritual C.A.F.É.</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- PANTALLA INICIAL -->
+    <div class="container" id="welcomeScreen">
+        <div class="streak-header">
+            <p>Racha: <span id="currentStreakWelcome" class="highlight">0</span> días</p>
+        </div>
+        <img src="https://i.imgur.com/2Z2Z2Z2.png" alt="Logo Tu Potencial Infinito" class="logo">
+        <h1>Mi Ritual C.A.F.É.</h1>
+        <p class="subtitle">Tu protocolo para vencer la pereza matutina y ganar el día.</p>
+        <div class="card">
+            <h2>Regla de Oro INQUEBRANTABLE</h2>
+            <p>Este ritual debe completarse <span class="highlight">ANTES de mirar la pantalla de tu celular.</span><br>Tu teléfono es la kriptonita de tus mañanas proactivas.</p>
+        </div>
+        <button onclick="startRitual()">Empezar mi Ritual</button>
+    </div>
+
+    <!-- SELECCIÓN DE MODO -->
+    <div class="container hidden" id="modeSelectionScreen">
+        <div class="streak-header">
+            <p>Racha: <span id="currentStreakMode" class="highlight">0</span> días</p>
+        </div>
+        <img src="https://i.imgur.com/2Z2Z2Z2.png" alt="Logo Tu Potencial Infinito" class="logo">
+        <h2>¿Cómo quieres hacer tu ritual hoy?</h2>
+        <button onclick="selectMode('audio')">Con audio guiado (5 minutos)</button>
+        <button onclick="selectMode('manual')">Manual (a mi ritmo)</button>
+        <button class="secondary" onclick="goBackToWelcome()">Volver al inicio</button>
+    </div>
+
+    <!-- PANTALLA DEL RITUAL -->
+    <div class="container hidden" id="ritualScreen">
+        <div class="streak-header">
+            <p>Racha: <span id="currentStreakRitualScreen" class="highlight">0</span> días</p>
+        </div>
+
+        <div class="top-bar">
+            <button class="link-button hidden" id="backToModeButton" onclick="backToModeSelection()">← Volver</button>
+            <div class="mode-switch">
+                <span id="currentModeLabel">Modo: Manual</span>
+                <button class="link-button" id="switchModeButton" onclick="switchMode()">Cambiar a guiado</button>
+            </div>
+        </div>
+
+        <img src="https://i.imgur.com/2Z2Z2Z2.png" alt="Logo Tu Potencial Infinito" class="logo">
+
+        <div class="step-header">
+            <h2 id="stepTitle"></h2>
+            <div class="tooltip-container">
+                <span class="help-icon" id="helpIcon">(?)</span>
+                <div class="tooltip-text" id="helpTooltip">
+                    <!-- Se rellena dinámicamente según el modo -->
+                </div>
+            </div>
+        </div>
+
+        <p id="stepInstructions"></p>
+
+        <div class="timer-display" id="timerDisplay"></div>
+
+        <div class="audio-player hidden" id="audioPlayerContainer">
+            <audio id="ritualAudio" controls>
+                <source src="" type="audio/mpeg">
+                Tu navegador no soporta el elemento de audio.
+            </audio>
+        </div>
+
+        <div class="checkbox-group hidden" id="checkboxGroup"></div>
+
+        <button id="nextStepButton" onclick="nextStep()">Siguiente paso</button>
+    </div>
+
+    <!-- PANTALLA FINAL -->
+    <div class="container hidden" id="completionScreen">
+        <div class="streak-header">
+            <p>Racha: <span id="currentStreakCompletionScreen" class="highlight">0</span> días</p>
+        </div>
+        <img src="https://i.imgur.com/2Z2Z2Z2.png" alt="Logo Tu Potencial Infinito" class="logo">
+        <h2>¡Ritual C.A.F.É. completado!</h2>
+        <p class="subtitle">Has ganado tu mañana. Estás al mando.</p>
+        <div class="card">
+            <h3>Tu racha de rituales</h3>
+            <p><span id="streakCount" class="highlight">0</span> días consecutivos</p>
+        </div>
+        <button onclick="startRitual()">Hacerlo otra vez</button>
+        <button class="secondary" onclick="goBackToWelcome()">Volver al inicio</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

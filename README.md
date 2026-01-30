@@ -69,5 +69,9 @@ sudo ufw enable
 
 ## 📝 Notas del Prototipo
 
+- **Rituales Actualizados**: Los rituales C.A.F.É., A.R.A y L.I.F.E. han sido actualizados con pasos detallados, duración y checklists que guían al usuario.
+- **Audios Guiados**: Cada paso de los rituales ahora incluye un audioPath para proporcionar una experiencia guiada (disponible en `/public/assets/audio/rituals`).
+- **Checklists Interactivas**: Se han implementado checklists para cada paso del ritual, permitiendo a los usuarios marcar su progreso.
+- **Lógica de Avance Flexible**: El avance entre pasos se adapta al modo: manual (50% del tiempo y todos los checkpoints marcados) o audio (el botón se habilita al finalizar el audio).
 - **Datos**: Esta versión utiliza `localStorage` para persistencia local en el navegador (Datos Dummy). No requiere base de datos externa en esta fase.
-- **Microfono**: La aplicación solicita permisos de micrófono para futuras integraciones de IA (configurado en `metadata.json`).
+- **Micrófono**: La aplicación solicita permisos de micrófono para futuras integraciones de IA (configurado en `metadata.json`).
