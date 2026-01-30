@@ -10,6 +10,7 @@ COPY tsconfig.json ./tsconfig.json
 COPY types.ts ./types.ts
 COPY vite.config.ts ./vite.config.ts
 COPY views ./views
+COPY public ./public
 RUN npm run build
 
 FROM nginx:stable-alpine
