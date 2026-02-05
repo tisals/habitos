@@ -54,7 +54,7 @@ directivas/
 
 ### 🔧 Componente 2: La Construcción - `src/` + `assets/` + `admin/`
 
-**¿Qué es?** Código limpio y determinista (PHP/Laravel para backend, Alpine.js + Tailwind para frontend), todo siguiendo patrones SOLID.
+**¿Qué es?** Código limpio y determinista (TypeScript/React/Vite para frontend, con una capa de Servicios/Repositorios desacoplada), todo siguiendo patrones SOLID.
 
 **¿Por qué existe?** Porque la directiva es el plano, pero el código es la casa. Aquí es donde vive la lógica real.
 
@@ -908,7 +908,7 @@ Este documento es el **contrato** entre tú y el sistema. Si lo respetas, la app
 
 ---
 
-**Última Actualización:** 2026-02-03\
-**Estado:** Activo - MVP en desarrollo\
+**Última Actualización:** 2026-02-05\
+**Estado:** Activo - MVP en desarrollo (Arquitectura en Cebolla/Supabase)\
 **Responsable:** Alejandro Leguízamo\
-**Versión:** 1.0 - Arquitectura Híbrida (Web + Play Store)
+**Versión:** 2.0 - Arquitectura Híbrida (Web + Play Store)

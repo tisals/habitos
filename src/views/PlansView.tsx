@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { User } from '../types';
 
@@ -10,70 +9,92 @@ interface PlansViewProps {
 
 const PlansView: React.FC<PlansViewProps> = ({ user, onUpgrade, onBack }) => {
   return (
-    <div className="p-8 space-y-8 animate-in zoom-in-95 duration-300">
+    <div className="p-6 space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
       <header className="flex items-center gap-4">
-        <button onClick={onBack} className="text-slate-400">
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7"/></svg>
+        <button onClick={onBack} className="p-2 -ml-2 text-slate-400 active:scale-90 transition-transform">
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M15 19l-7-7 7-7"/>
+          </svg>
         </button>
-        <h1 className="text-xl font-bold">Desbloquea tu Potencial</h1>
+        <h1 className="text-xl font-bold text-slate-800">Membresía Fundadora</h1>
       </header>
 
-      <div className="bg-white border-2 border-indigo-600 rounded-3xl p-8 shadow-xl relative overflow-hidden">
-        <div className="absolute top-0 right-0 bg-indigo-600 text-white text-[10px] font-bold px-4 py-1 rounded-bl-xl uppercase tracking-tighter">Plan Único</div>
+      {/* Card Principal de Oferta */}
+      <div className="bg-white border-2 border-amber-500 rounded-[2rem] p-6 shadow-2xl relative overflow-hidden">
+        <div className="absolute top-0 right-0 bg-amber-500 text-white text-[10px] font-black px-4 py-1.5 rounded-bl-2xl uppercase tracking-widest">
+          Oferta Limitada
+        </div>
         
         <div className="space-y-6">
           <div>
-            <h2 className="text-2xl font-black text-slate-800 uppercase tracking-tighter">Membresía Premium</h2>
-            <p className="text-slate-500 text-sm">El sistema completo para el alto rendimiento.</p>
+            <h2 className="text-2xl font-black text-slate-900 leading-tight">USUARIO FUNDADOR 🚀</h2>
+            <p className="text-slate-500 text-sm mt-1">Acceso total al sistema de alto rendimiento.</p>
           </div>
 
-          <div className="space-y-4">
+          {/* Lista de Beneficios y Bonos */}
+          <div className="space-y-3">
             {[
-              'Ritual P.I.T. (Salvavidas) desbloqueado',
-              'Audios guiados en Ritual de Cierre',
-              'Historial y métricas avanzadas',
-              'Soporte prioritario por WhatsApp',
-              'Acceso a contenido exclusivo de nivel 3'
-            ].map((feature, i) => (
+              { text: 'Ritual P.I.T. (Salvavidas) Desbloqueado', bold: true },
+              { text: 'Audios Guiados (C.A.F.É. y L.I.F.E.)', bold: true },
+              { text: 'Bono: Mapa de Autosabotaje 📘', bold: false },
+              { text: 'Bono: Kit de Arranque C.A.F.É. 🧠', bold: false },
+              { text: 'Acceso Prioritario a Mejoras 🔥', bold: false }
+            ].map((item, i) => (
               <div key={i} className="flex items-start gap-3">
-                <svg className="w-5 h-5 text-indigo-500 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/></svg>
-                <span className="text-sm font-medium text-slate-700">{feature}</span>
+                <div className="mt-1 bg-emerald-100 rounded-full p-0.5">
+                  <svg className="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"/>
+                  </svg>
+                </div>
+                <span className={`text-sm ${item.bold ? 'font-bold text-slate-800' : 'text-slate-600'}`}>
+                  {item.text}
+                </span>
               </div>
             ))}
           </div>
 
-          <div className="pt-4 border-t border-slate-100 flex items-baseline gap-2">
-            <span className="text-4xl font-black text-slate-800">$19.99</span>
-            <span className="text-slate-400 font-bold uppercase text-xs">/ Mes</span>
+          {/* Sección de Precio */}
+          <div className="pt-4 border-t border-slate-100">
+            <div className="flex items-center gap-2 mb-1">
+              <span className="text-slate-400 line-through text-sm font-bold">$49.000</span>
+              <span className="bg-amber-100 text-amber-700 text-[10px] font-black px-2 py-0.5 rounded-full uppercase">Ahorra 40%</span>
+            </div>
+            <div className="flex items-baseline gap-2">
+              <span className="text-4xl font-black text-slate-900">$29.000</span>
+              <span className="text-slate-500 font-bold text-xs uppercase">COP / MES</span>
+            </div>
           </div>
 
           {user.isPremium ? (
-            <div className="bg-green-100 text-green-700 p-4 rounded-xl text-center font-bold">
-              ¡Ya eres Premium!
+            <div className="bg-emerald-50 border border-emerald-200 text-emerald-700 p-4 rounded-2xl text-center font-bold animate-pulse">
+              ✨ Ya eres Usuario Fundador
             </div>
           ) : (
-            <div className="space-y-3">
+            <div className="space-y-4">
               <button 
                 onClick={() => {
-                  window.open(`https://wa.me/573123456789?text=Hola!%20Quiero%20desbloquear%20la%20versión%20completa%20de%20La%20Llave%20de%20tu%20Potencial`, '_blank');
-                  // For demo purposes, we allow immediate unlock
+                  const msg = encodeURIComponent("¡Hola! Quiero asegurar mi cupo como Usuario Fundador de La Llave de tu Potencial 🚀");
+                  window.open(`https://wa.me/573123456789?text=${msg}`, '_blank');
                   onUpgrade();
                 }}
-                className="w-full bg-indigo-600 text-white py-4 rounded-2xl font-bold text-lg shadow-lg active:bg-indigo-700 transition-all active:scale-95"
+                className="w-full bg-gradient-to-r from-amber-500 to-orange-600 text-white py-4 rounded-2xl font-black text-lg shadow-lg shadow-orange-200 active:scale-95 transition-all"
               >
-                Activar con WhatsApp
+                Quiero Mi Acceso Ahora
               </button>
-              <p className="text-[10px] text-center text-slate-400 font-medium">Activación manual inmediata tras validación de pago.</p>
+              
+              <div className="bg-amber-50 border-l-4 border-amber-400 p-3 rounded-r-xl">
+                <p className="text-[11px] text-amber-800 font-bold leading-tight">
+                  ⚠️ Solo quedan cupos para 100 fundadores. El precio subirá pronto.
+                </p>
+              </div>
             </div>
           )}
         </div>
       </div>
 
-      <div className="text-center">
-        <p className="text-xs text-slate-400 leading-relaxed px-6">
-          Más de 500 líderes ya están optimizando su día con nuestros rituales científicos de alto rendimiento.
-        </p>
-      </div>
+      <p className="text-[11px] text-center text-slate-400 px-8 leading-relaxed">
+        Únete a los líderes que ya dominan su energía. Activación manual inmediata vía WhatsApp.
+      </p>
     </div>
   );
 };

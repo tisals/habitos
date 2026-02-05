@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Llave de Tu Potencial - Desbloquea Tu Máximo Rendimiento</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #1A2B48;
+        }
+
+        /* Hero Section - Light Background */
+        .hero {
+            background: #F8FAFC;
+            padding: 80px 20px;
+            text-align: center;
+            min-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: #1A2B48;
+            margin-bottom: 24px;
+            line-height: 1.1;
+            max-width: 900px;
+        }
+
+        .hero .subheadline {
+            font-size: 1.5rem;
+            color: #475569;
+            margin-bottom: 40px;
+            max-width: 700px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+            color: white;
+            padding: 18px 48px;
+            border-radius: 12px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(245, 158, 11, 0.3);
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 30px rgba(245, 158, 11, 0.5);
+            background: linear-gradient(135deg, #D97706 0%, #B45309 100%);
+        }
+
+        /* Bridge Section - Dark Background */
+        .bridge {
+            background: linear-gradient(135deg, #1A2B48 0%, #0F172A 100%);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .bridge h2 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            color: #F59E0B;
+        }
+
+        .bridge p {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto 20px;
+            line-height: 1.8;
+        }
+
+        /* Problem Section - Light Background */
+        .problem {
+            background: #F8FAFC;
+            padding: 80px 20px;
+        }
+
+        .problem h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 50px;
+            color: #1A2B48;
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .problem-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .problem-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #1A2B48;
+        }
+
+        /* Solution Section - Dark Background */
+        .solution {
+            background: linear-gradient(135deg, #1A2B48 0%, #0F172A 100%);
+            color: white;
+            padding: 80px 20px;
+        }
+
+        .solution h2 {
+            font-size: 2.8rem;
+            text-align: center;
+            margin-bottom: 60px;
+            color: #F59E0B;
+        }
+
+        .rituals {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .ritual-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .ritual-card:hover {
+            transform: translateY(-5px);
+            border-color: #F59E0B;
+        }
+
+        .ritual-card h3 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: #F59E0B;
+        }
+
+        .ritual-card .ritual-name {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: #06B6D4;
+        }
+
+        .ritual-card ul {
+            list-style: none;
+            margin-top: 20px;
+        }
+
+        .ritual-card li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .ritual-card li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #10B981;
+            font-weight: bold;
+        }
+
+        /* Offer Section - Light Background */
+        .offer {
+            background: #F8FAFC;
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .offer h2 {
+            font-size: 2.8rem;
+            margin-bottom: 30px;
+            color: #1A2B48;
+        }
+
+        .price-box {
+            background: white;
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 50px;
+            border-radius: 16px;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.12);
+            border: 2px solid #F59E0B;
+            position: relative;
+        }
+
+        .old-price {
+            font-size: 1.5rem;
+            color: #94A3B8;
+            text-decoration: line-through;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .price {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: #1A2B48;
+            margin-bottom: 10px;
+            line-height: 1;
+        }
+
+        .price-detail {
+            font-size: 1.2rem;
+            color: #64748B;
+            margin-bottom: 30px;
+        }
+
+        .bonuses {
+            max-width: 900px;
+            margin: 50px auto;
+            text-align: left;
+        }
+
+        .bonus-item {
+            background: white;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            border-left: 4px solid #10B981;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .bonus-item h4 {
+            color: #1A2B48;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        /* Social Proof - Dark Background */
+        .social-proof {
+            background: linear-gradient(135deg, #1A2B48 0%, #0F172A 100%);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .social-proof h2 {
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: #F59E0B;
+        }
+
+        /* Final CTA - Light Background */
+        .final-cta {
+            background: #F8FAFC;
+            padding: 100px 20px;
+            text-align: center;
+        }
+
+        .final-cta h2 {
+            font-size: 2.8rem;
+            margin-bottom: 30px;
+            color: #1A2B48;
+        }
+
+        .urgency {
+            background: #FEF3C7;
+            border-left: 4px solid #F59E0B;
+            padding: 20px;
+            max-width: 700px;
+            margin: 30px auto;
+            border-radius: 8px;
+        }
+
+        .urgency p {
+            color: #92400E;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: white;
+            margin: 10% auto;
+            padding: 40px;
+            border-radius: 16px;
+            max-width: 500px;
+            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.3);
+            position: relative;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .close {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            color: #64748B;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .close:hover {
+            color: #1A2B48;
+        }
+
+        .modal h3 {
+            font-size: 2rem;
+            color: #1A2B48;
+            margin-bottom: 10px;
+        }
+
+        .modal p {
+            color: #64748B;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #1A2B48;
+            font-weight: 600;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #E2E8F0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #F59E0B;
+        }
+
+        .submit-button {
+            width: 100%;
+            background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-button:hover {
+            background: linear-gradient(135deg, #D97706 0%, #B45309 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(245, 158, 11, 0.4);
+        }
+
+        .submit-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .subheadline {
+                font-size: 1.2rem;
+            }
+
+            .rituals {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>¿Y si el problema no es tu falta de disciplina... sino que nadie te enseñó a activar tu energía?</h1>
+        <p class="subheadline">Descubre los 3 rituales científicos que usan los líderes de alto rendimiento para eliminar el autosabotaje y multiplicar su productividad.</p>
+        <button class="cta-button" onclick="openModal()">Quiero Desbloquear Mi Potencial</button>
+    </section>
+
+    <!-- Bridge Section -->
+    <section class="bridge">
+        <h2>Esto no es motivación barata.</h2>
+        <p>Es un sistema probado que transforma tu energía, tu enfoque y tus resultados.</p>
+        <p>En menos de 15 minutos al día.</p>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="problem">
+        <h2>¿Te suena familiar?</h2>
+        <div class="problem-grid">
+            <div class="problem-card">
+                <h3>🔥 Arrancas con toda...</h3>
+                <p>Pero a las 3 de la tarde ya estás fundido. Tu energía se evapora y terminas aplazando lo importante.</p>
+            </div>
+            <div class="problem-card">
+                <h3>🧠 Sabes qué hacer...</h3>
+                <p>Pero tu mente te sabotea. Procrastinación, distracciones, excusas. Siempre la misma historia.</p>
+            </div>
+            <div class="problem-card">
+                <h3>⏰ Trabajas más horas...</h3>
+                <p>Pero produces menos. Te sientes atrapado en un ciclo de esfuerzo sin resultados.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section class="solution">
+        <h2>La Solución: Los 3 Rituales de Alto Rendimiento</h2>
+        <div class="rituals">
+            <div class="ritual-card">
+                <h3>☕ C.A.F.É.</h3>
+                <p class="ritual-name">Ritual de Arranque</p>
+                <p>Activa tu energía mental en los primeros 15 minutos del día.</p>
+                <ul>
+                    <li>Claridad total sobre tu día</li>
+                    <li>Enfoque en lo que importa</li>
+                    <li>Energía sostenida hasta la tarde</li>
+                </ul>
+            </div>
+            <div class="ritual-card">
+                <h3>🌙 L.I.F.E.</h3>
+                <p class="ritual-name">Ritual de Cierre</p>
+                <p>Libera el estrés y prepara tu mente para el día siguiente.</p>
+                <ul>
+                    <li>Desconexión real del trabajo</li>
+                    <li>Sueño profundo y reparador</li>
+                    <li>Paz mental garantizada</li>
+                </ul>
+            </div>
+            <div class="ritual-card">
+                <h3>🏎️ P.I.T.</h3>
+                <p class="ritual-name">Ritual de Reactivación</p>
+                <p>Tu parada en boxes. Recupera energía y enfoque en 2-5 minutos.</p>
+                <ul>
+                    <li>Elimina el bajón de las 3pm</li>
+                    <li>Reactiva tu concentración al instante</li>
+                    <li>Mantén el ritmo sin fundirte</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Offer Section -->
+    <section class="offer">
+        <h2>Únete como Usuario Fundador</h2>
+        <div class="price-box">
+            <span class="old-price">$49.000 COP</span>
+            <div class="price">$29.000 COP</div>
+            <p class="price-detail">Membresía mensual</p>
+            <button class="cta-button" onclick="openModal()">Sí, Quiero Acceso Ahora</button>
+        </div>
+
+        <div class="bonuses">
+            <h3 style="text-align: center; margin-bottom: 30px; font-size: 2rem; color: #1A2B48;">🎁 Bonos Exclusivos para Usuarios Fundadores</h3>
+            <div class="bonus-item">
+                <h4>📘 Bono #1: Mapa de Autosabotaje</h4>
+                <p>Identifica los 7 patrones que te impiden avanzar y cómo neutralizarlos.</p>
+            </div>
+            <div class="bonus-item">
+                <h4>🧠 Bono #2: Kit de Arranque del Ritual C.A.F.É.</h4>
+                <p>Plantillas listas para usar desde el día 1.</p>
+            </div>
+            <div class="bonus-item">
+                <h4>🔥 Bono #3: Acceso Prioritario a Nuevas Funcionalidades</h4>
+                <p>Sé el primero en probar cada mejora de la plataforma.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Proof -->
+    <section class="social-proof">
+        <h2>Esto Funciona. Y Está Respaldado por Ciencia.</h2>
+        <p style="max-width: 800px; margin: 0 auto; font-size: 1.2rem;">Cada ritual está diseñado con base en investigaciones de neurociencia, psicología del rendimiento y gestión de energía. No es magia. Es método.</p>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="final-cta">
+        <h2>Es tu momento.</h2>
+        <p style="font-size: 1.3rem; margin-bottom: 30px; color: #475569;">Deja de luchar contra ti mismo. Empieza a trabajar con tu energía.</p>
+        <button class="cta-button" onclick="openModal()">Quiero Ser Usuario Fundador</button>
+
+        <div class="urgency">
+            <p>⚠️ Solo 100 cupos disponibles para Usuarios Fundadores. Después, el precio sube.</p>
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <div id="signupModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">×</span>
+            <h3>¡Último Paso! 🚀</h3>
+            <p>Ingresa tus datos para asegurar tu lugar como Usuario Fundador</p>
+            <form id="signupForm" onsubmit="handleSubmit(event)">
+                <div class="form-group">
+                    <label for="name">Nombre Completo</label>
+                    <input type="text" id="name" name="name" required placeholder="Tu nombre">
+                </div>
+                <div class="form-group">
+                    <label for="email">Correo Electrónico</label>
+                    <input type="email" id="email" name="email" required placeholder="tu@email.com">
+                </div>
+                <button type="submit" class="submit-button" id="submitBtn">Continuar al Pago</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Modal Functions
+        function openModal() {
+            document.getElementById('signupModal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('signupModal').style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('signupModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+
+        // Handle Form Submit
+        async function handleSubmit(event) {
+            event.preventDefault();
+
+            const submitBtn = document.getElementById('submitBtn');
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+
+            // Disable button while processing
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Procesando...';
+
+            // Prepare data
+            const formData = {
+                name: name,
+                email: email,
+                timestamp: new Date().toISOString(),
+                source: 'landing_page_llave_potencial'
+            };
+
+            try {
+                // WEBHOOK URL - Replace with your actual webhook
+                const webhookUrl = 'YOUR_WEBHOOK_URL_HERE';
+
+                // Send to webhook
+                const response = await fetch(webhookUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                if (response.ok) {
+                    // Success - Redirect to payment gateway
+                    // PAYMENT GATEWAY URL - Replace with your actual payment URL
+                    const paymentUrl = 'YOUR_PAYMENT_GATEWAY_URL_HERE';
+
+                    // You can append user data to payment URL if needed
+                    const paymentUrlWithParams = `${paymentUrl}?email=${encodeURIComponent(email)}&name=${encodeURIComponent(name)}`;
+
+                    // Redirect to payment
+                    window.location.href = paymentUrlWithParams;
+                } else {
+                    throw new Error('Error al enviar datos');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Hubo un error al procesar tu solicitud. Por favor intenta de nuevo.');
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Continuar al Pago';
+            }
+        }
+    </script>
+</body>
+</html>
