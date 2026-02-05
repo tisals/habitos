@@ -8,6 +8,7 @@ import DiagnosticView from './views/DiagnosticView';
 import AdminView from './views/AdminView';
 import PlansView from './views/PlansView';
 import LandingView from './views/LandingView';
+import ProfileView from './views/ProfileView';
 
 const App: React.FC = () => {
   const [user, setUser] = useState<User>(() => {
@@ -20,7 +21,7 @@ const App: React.FC = () => {
     return saved ? JSON.parse(saved) : [];
   });
 
-  const [currentView, setCurrentView] = useState<'landing' | 'dashboard' | 'ritual' | 'diagnostic' | 'admin' | 'plans'>('landing');
+  const [currentView, setCurrentView] = useState<'landing' | 'dashboard' | 'ritual' | 'diagnostic' | 'admin' | 'plans' | 'profile'>('landing');
   const [activeRitual, setActiveRitual] = useState<Ritual | null>(null);
 
   useEffect(() => {
@@ -92,9 +93,9 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen max-w-md mx-auto bg-white shadow-xl flex flex-col relative">
+    <div className="min-h-screen max-w-md mx-auto bg-white dark:bg-gray-900 shadow-xl flex flex-col relative transition-colors duration-200">
       {/* Quick Nav for Demo */}
-      <div className="bg-slate-800 text-white text-[10px] p-1 flex justify-between items-center z-50 sticky top-0">
+      <div className="bg-slate-800 dark:bg-gray-950 text-white text-[10px] p-1 flex justify-between items-center z-50 sticky top-0">
         <div className="flex gap-2">
           <button onClick={() => setCurrentView('landing')}>Home</button>
           <button onClick={() => setCurrentView('dashboard')}>Dashboard</button>
@@ -136,27 +137,38 @@ const App: React.FC = () => {
           />
         )}
         {currentView === 'plans' && (
-          <PlansView 
-            user={user} 
-            onUpgrade={() => handleUpdatePremium(true)} 
-            onBack={() => setCurrentView('dashboard')} 
+          <PlansView
+            user={user}
+            onUpgrade={() => handleUpdatePremium(true)}
+            onBack={() => setCurrentView('dashboard')}
+          />
+        )}
+        {currentView === 'profile' && (
+          <ProfileView
+            user={user}
+            stats={stats}
+            onBack={() => setCurrentView('dashboard')}
           />
         )}
       </main>
 
       {/* Persistent Bottom Bar for Mobile Feel */}
       {currentView !== 'landing' && currentView !== 'ritual' && currentView !== 'diagnostic' && (
-        <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md bg-white border-t border-slate-200 py-3 flex justify-around items-center z-40">
-          <button onClick={() => setCurrentView('dashboard')} className={`flex flex-col items-center gap-1 ${currentView === 'dashboard' ? 'text-indigo-600' : 'text-slate-400'}`}>
+        <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md bg-white dark:bg-gray-800 border-t border-slate-200 dark:border-gray-700 py-3 flex justify-around items-center z-40 transition-colors duration-200">
+          <button onClick={() => setCurrentView('dashboard')} className={`flex flex-col items-center gap-1 ${currentView === 'dashboard' ? 'text-indigo-600 dark:text-indigo-400' : 'text-slate-400 dark:text-gray-500'}`}>
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
             <span className="text-[10px] font-medium">Dashboard</span>
           </button>
-          <button onClick={() => setCurrentView('plans')} className={`flex flex-col items-center gap-1 ${currentView === 'plans' ? 'text-indigo-600' : 'text-slate-400'}`}>
+          <button onClick={() => setCurrentView('plans')} className={`flex flex-col items-center gap-1 ${currentView === 'plans' ? 'text-indigo-600 dark:text-indigo-400' : 'text-slate-400 dark:text-gray-500'}`}>
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
             <span className="text-[10px] font-medium">Premium</span>
           </button>
+          <button onClick={() => setCurrentView('profile')} className={`flex flex-col items-center gap-1 ${currentView === 'profile' ? 'text-indigo-600 dark:text-indigo-400' : 'text-slate-400 dark:text-gray-500'}`}>
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+            <span className="text-[10px] font-medium">Perfil</span>
+          </button>
           {user.role === 'admin' && (
-            <button onClick={() => setCurrentView('admin')} className={`flex flex-col items-center gap-1 ${currentView === 'admin' ? 'text-indigo-600' : 'text-slate-400'}`}>
+            <button onClick={() => setCurrentView('admin')} className={`flex flex-col items-center gap-1 ${currentView === 'admin' ? 'text-indigo-600 dark:text-indigo-400' : 'text-slate-400 dark:text-gray-500'}`}>
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
               <span className="text-[10px] font-medium">Admin</span>
             </button>
