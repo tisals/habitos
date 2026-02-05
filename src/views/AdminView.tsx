@@ -1,4 +1,4 @@
-
+ 
 import React from 'react';
 import { Ritual, CompletionRecord } from '../types';
 
@@ -12,7 +12,7 @@ const AdminView: React.FC<AdminViewProps> = ({ rituals, completions, onBack }) =
   const stats = {
     totalCompletions: completions.length,
     cafeCompletions: completions.filter(c => c.ritualId === 'ritual_cafe').length,
-    araCompletions: completions.filter(c => c.ritualId === 'ritual_ara').length,
+    pitCompletions: completions.filter(c => c.ritualId === 'ritual_pit' || c.ritualId === 'ritual_ara').length,
     lifeCompletions: completions.filter(c => c.ritualId === 'ritual_life').length,
   };
 
@@ -38,8 +38,8 @@ const AdminView: React.FC<AdminViewProps> = ({ rituals, completions, onBack }) =
             <div className="text-2xl font-black text-indigo-600">{stats.cafeCompletions}</div>
           </div>
           <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
-            <span className="text-xs text-slate-400 font-medium">ARA (Rescate)</span>
-            <div className="text-2xl font-black text-red-600">{stats.araCompletions}</div>
+            <span className="text-xs text-slate-400 font-medium">P.I.T. (Rescate)</span>
+            <div className="text-2xl font-black text-red-600">{stats.pitCompletions}</div>
           </div>
           <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
             <span className="text-xs text-slate-400 font-medium">Life</span>

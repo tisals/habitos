@@ -1,6 +1,11 @@
 
-import React from 'react';
-import { User, UserStats, Ritual, UserLevel, RitualType } from '../types';
+import React, { useState } from 'react';
+import { User, UserStats, Ritual, UserLevel, RitualType, DailyState } from '../types';
+import MetricSlider from '../components/dashboard/MetricSlider';
+import RecommendationCard from '../components/dashboard/RecommendationCard';
+import StreakWidget from '../components/dashboard/StreakWidget';
+import WeekDots from '../components/dashboard/WeekDots';
+import { RecommendationService } from '../services/RecommendationService';
 
 interface DashboardViewProps {
   user: User;
@@ -12,15 +17,44 @@ interface DashboardViewProps {
 }
 
 const DashboardView: React.FC<DashboardViewProps> = ({ user, stats, rituals, onSelectRitual, onGoToPlans, onGoToAdmin }) => {
+  const [dailyState, setDailyState] = useState<DailyState | null>(null);
+  const [showCheckIn, setShowCheckIn] = useState(true);
+  const [energia, setEnergia] = useState(3);
+  const [enfoque, setEnfoque] = useState(3);
+  const [ruidoMental, setRuidoMental] = useState(3);
+
+  const handleSaveCheckIn = () => {
+    const newState: DailyState = {
+      userId: user.id,
+      date: new Date().toISOString().split('T')[0],
+      energia,
+      enfoque,
+      ruidoMental,
+      timestamp: Date.now()
+    };
+    setDailyState(newState);
+    setShowCheckIn(false);
+  };
+
+  const availableRituals = rituals.filter(ritual => {
+    if (user.level < ritual.minLevel) return false;
+    if (ritual.requiresPremium && !user.isPremium) return false;
+    return true;
+  });
+
+  const recommendation = RecommendationService.getRecommendation(
+    dailyState,
+    availableRituals,
+    stats.completionsToday
+  );
+
   const isCafeDone = stats.completionsToday.includes('ritual_cafe');
   const isLifeDone = stats.completionsToday.includes('ritual_life');
   const isDayWon = isCafeDone && isLifeDone;
 
-  const getSmartMessage = () => {
-    if (!isCafeDone) return "Tu día está intacto. Empecemos por ganar tu mañana con C.A.F.É.";
-    if (isCafeDone && !isLifeDone) return "Ya ganaste la mañana, ahora no dejes el día abierto. Reserva 5 min para el cierre.";
-    return "¡Día Ganado! Has cumplido tus rituales hoy. Tu potencial está activado.";
-  };
+  const last7Days = Array(7).fill(false).map((_, i) => {
+    return i < stats.streak;
+  });
 
   const getRitualStatus = (ritual: Ritual) => {
     if (user.level < ritual.minLevel) return 'locked-level';
@@ -30,31 +64,58 @@ const DashboardView: React.FC<DashboardViewProps> = ({ user, stats, rituals, onS
   };
 
   return (
-    <div className="p-6 space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
-      {/* Header & Streak */}
+    <div className="p-6 space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
       <header className="flex justify-between items-start">
         <div>
           <h1 className="text-2xl font-bold text-slate-800">Hola, {user.name.split(' ')[0]}</h1>
           <p className="text-slate-500 text-sm">Nivel {user.level} {user.isPremium && '• Premium'}</p>
         </div>
-        <div className="bg-indigo-50 border border-indigo-100 rounded-2xl px-4 py-2 flex flex-col items-center">
-          <span className="text-2xl">🔥</span>
-          <span className="text-lg font-bold text-indigo-700 leading-none">{stats.streak}</span>
-          <span className="text-[10px] uppercase font-bold text-indigo-400">Racha</span>
-        </div>
+        <StreakWidget streak={stats.streak} />
       </header>
 
-      {/* Smart Message */}
-      <div className={`p-4 rounded-2xl border ${isDayWon ? 'bg-green-50 border-green-100' : 'bg-indigo-600 text-white border-transparent'}`}>
-        <p className={`text-sm font-medium ${isDayWon ? 'text-green-800' : 'text-indigo-50'}`}>
-          {getSmartMessage()}
-        </p>
-      </div>
+      {showCheckIn && !dailyState && (
+        <div className="bg-white border border-slate-200 rounded-2xl p-5 space-y-4">
+          <div>
+            <h2 className="text-lg font-bold text-slate-800 mb-1">¿Cómo estás hoy?</h2>
+            <p className="text-xs text-slate-500">Toma 20 segundos para registrar tu estado</p>
+          </div>
 
-      {/* Rituals Grid */}
-      <div className="grid grid-cols-1 gap-4">
-        <h2 className="text-lg font-bold text-slate-800 mt-2">Tus Rituales</h2>
-        
+          <div className="space-y-3">
+            <MetricSlider label="Energía" value={energia} onChange={setEnergia} color="amber" />
+            <MetricSlider label="Enfoque" value={enfoque} onChange={setEnfoque} color="cyan" />
+            <MetricSlider label="Ruido Mental" value={ruidoMental} onChange={setRuidoMental} color="green" />
+          </div>
+
+          <button
+            onClick={handleSaveCheckIn}
+            className="w-full bg-indigo-600 text-white py-3 rounded-xl font-bold text-sm active:scale-95 transition-transform"
+          >
+            Guardar
+          </button>
+        </div>
+      )}
+
+      {dailyState && !isDayWon && (
+        <RecommendationCard
+          ritual={recommendation.ritual}
+          message={recommendation.message}
+          onStart={() => onSelectRitual(recommendation.ritual)}
+        />
+      )}
+
+      {isDayWon && (
+        <div className="bg-green-50 border border-green-100 p-4 rounded-2xl">
+          <p className="text-sm font-medium text-green-800">
+            ¡Día Ganado! Has cumplido tus rituales hoy. Tu potencial está activado.
+          </p>
+        </div>
+      )}
+
+      <WeekDots completions={last7Days} />
+
+      <div className="space-y-4">
+        <h2 className="text-lg font-bold text-slate-800">Tus Rituales</h2>
+
         {rituals.map(ritual => {
           const status = getRitualStatus(ritual);
           const isLocked = status === 'locked-level' || status === 'locked-premium';
@@ -73,7 +134,7 @@ const DashboardView: React.FC<DashboardViewProps> = ({ user, stats, rituals, onS
             >
               <div className="flex justify-between items-start mb-2">
                 <span className="text-3xl">
-                  {ritual.type === RitualType.CAFE ? '☕' : ritual.type === RitualType.ARA ? '⚡' : '✨'}
+                  {ritual.type === RitualType.CAFE ? '☕' : ritual.type === RitualType.PIT ? '⚡' : '✨'}
                 </span>
                 {isDone ? (
                   <span className="bg-green-500 text-white p-1 rounded-full">
@@ -85,10 +146,10 @@ const DashboardView: React.FC<DashboardViewProps> = ({ user, stats, rituals, onS
                   </span>
                 )}
               </div>
-              
+
               <h3 className={`font-bold ${isDone ? 'text-green-800' : 'text-slate-800'}`}>{ritual.name}</h3>
               <p className="text-xs text-slate-500 mt-1 line-clamp-2">{ritual.description}</p>
-              
+
               {status === 'locked-level' && (
                 <div className="mt-2 text-[10px] font-bold text-slate-400 uppercase">Disponible en Nivel {ritual.minLevel}</div>
               )}
@@ -103,8 +164,8 @@ const DashboardView: React.FC<DashboardViewProps> = ({ user, stats, rituals, onS
       {!user.isPremium && (
         <div className="bg-gradient-to-br from-indigo-500 to-purple-600 p-6 rounded-3xl text-white shadow-lg">
           <h3 className="text-lg font-bold mb-1">Desbloquea el Nivel 3</h3>
-          <p className="text-indigo-100 text-xs mb-4">Accede a audios guiados, Ritual ARA y seguimiento avanzado.</p>
-          <button 
+          <p className="text-indigo-100 text-xs mb-4">Accede a audios guiados, Ritual P.I.T. y seguimiento avanzado.</p>
+          <button
             onClick={onGoToPlans}
             className="bg-white text-indigo-600 px-6 py-2 rounded-xl text-sm font-bold w-full shadow-md active:bg-indigo-50"
           >

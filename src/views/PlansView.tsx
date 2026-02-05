@@ -29,7 +29,7 @@ const PlansView: React.FC<PlansViewProps> = ({ user, onUpgrade, onBack }) => {
 
           <div className="space-y-4">
             {[
-              'Ritual ARA (Salvavidas) desbloqueado',
+              'Ritual P.I.T. (Salvavidas) desbloqueado',
               'Audios guiados en Ritual de Cierre',
               'Historial y métricas avanzadas',
               'Soporte prioritario por WhatsApp',

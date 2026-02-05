@@ -46,7 +46,7 @@ const App: React.FC = () => {
     for (let i = 0; i < uniqueDates.length; i++) {
       const date = uniqueDates[i];
       const ritualsDoneOnDate = completions.filter(c => c.date === date).map(c => c.ritualId);
-      const isDayWon = ritualsDoneOnDate.includes('ritual_cafe') && ritualsDoneOnDate.includes('ritual_cierre');
+      const isDayWon = ritualsDoneOnDate.includes('ritual_cafe') && ritualsDoneOnDate.includes('ritual_life');
       
       if (isDayWon) {
         streak++;

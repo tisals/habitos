@@ -1,11 +1,10 @@
-
-import { Ritual, RitualType, UserLevel, User } from './types';
+import { Ritual, RitualType, UserLevel, User } from '../types';
 
 export const INITIAL_USER: User = {
   id: 'user_001',
   name: 'Demo Leader',
   email: 'leader@example.com',
-  level: UserLevel.NIVEL_1, // Default starting level
+  level: UserLevel.NIVEL_1,
   isPremium: false,
   role: 'user'
 };

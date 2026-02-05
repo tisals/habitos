@@ -12,7 +12,7 @@ public/assets/audio/rituals/
 │   ├── cuerpo.mp3
 │   ├── alma.mp3
 │   └── foco.mp3
-├── ara/
+├── PIT/
 │   ├── atrapa.mp3
 │   ├── reta.mp3
 │   └── afirma.mp3
@@ -48,7 +48,7 @@ Ajustaremos el `Ritual C.A.F.É.` para que coincida con la "realidad" del demo (
 - **Paso A - ALMA**: 120s. Respiración 4-7-8.
 - **Paso F - FOCO**: 120s. Cuaderno físico, OEU, Visualización.
 
-### Ritual ARA (3 min)
+### Ritual PIT (3 min)
 - **Paso A - ATRAPA**: Reten ese pensamiento automatico crítico.
 - **Paso R - RETA**: Esto es 100% verdad, ¿qué le dirías a tu mejor amigo?
 - **Paso A - AFIRMA**: Cuál es la nueva clausula de tu contrato.
@@ -88,3 +88,4 @@ Se actualizará el `README.md` para reflejar la nueva estructura de activos y la
 
 ---
 ¿Estás de acuerdo con este plan para proceder a la implementación?
+

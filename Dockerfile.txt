@@ -1,16 +1,17 @@
 FROM node:20-alpine AS builder
 WORKDIR /app
-COPY package.json ./
+
+COPY package*.json ./
 RUN npm install
-COPY App.tsx ./App.tsx
-COPY constants.tsx ./constants.tsx
-COPY index.html ./index.html
-COPY index.tsx ./index.tsx
-COPY tsconfig.json ./tsconfig.json
-COPY types.ts ./types.ts
-COPY vite.config.ts ./vite.config.ts
-COPY views ./views
+
+COPY tsconfig.json vite.config.ts ./
+COPY index.html ./
+COPY src ./src
 COPY public ./public
+
+COPY constants.tsx types.ts ./
+COPY views ./views
+
 RUN npm run build
 
 FROM nginx:stable-alpine

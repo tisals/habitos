@@ -1,4 +1,3 @@
-
 export enum UserLevel {
   NIVEL_1 = 1,
   NIVEL_2 = 2,
@@ -8,7 +7,7 @@ export enum UserLevel {
 export enum RitualType {
   CAFE = 'CAFE',
   PIT = 'PIT',
-  LIFE = 'LIFE' // Cambiado de CIERRE a LIFE
+  LIFE = 'LIFE'
 }
 
 export interface RitualStep {
@@ -44,12 +43,23 @@ export interface User {
 export interface CompletionRecord {
   userId: string;
   ritualId: string;
-  date: string; // ISO format YYYY-MM-DD
+  date: string;
   timestamp: number;
 }
 
 export interface UserStats {
   streak: number;
   lastCompletionDate: string | null;
-  completionsToday: string[]; // Ritual IDs
+  completionsToday: string[];
 }
+
+export interface DailyState {
+  userId: string;
+  date: string;
+  energia: number;
+  enfoque: number;
+  ruidoMental: number;
+  timestamp: number;
+}
+
+export type TimeOfDay = 'morning' | 'afternoon' | 'night';

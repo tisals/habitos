@@ -4,7 +4,8 @@ import { DIAGNOSTIC_QUESTIONS } from '../constants';
 import { UserLevel } from '../types';
 
 interface DiagnosticViewProps {
-  onComplete: (level: UserLevel) => void;
+  onComplete: (score: number) => void;
+  onBack: () => void;
 }
 
 const DiagnosticView: React.FC<DiagnosticViewProps> = ({ onComplete }) => {
