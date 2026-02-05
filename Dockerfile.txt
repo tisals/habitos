@@ -10,7 +10,6 @@ COPY src ./src
 COPY public ./public
 
 COPY constants.tsx types.ts ./
-COPY views ./views
 
 RUN npm run build
 
